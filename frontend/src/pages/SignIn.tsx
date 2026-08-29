@@ -36,33 +36,6 @@ export default function SignIn() {
     }
   };
 
-  const handleQuickLogin = async (role: 'Admin' | 'Manager' | 'Staff') => {
-    setIsLoading(true);
-    let emailSearch = '';
-    let passwordSearch = '';
-    if (role === 'Admin') {
-      emailSearch = 'admin@shreeinteriors.com';
-      passwordSearch = 'admin123';
-    } else if (role === 'Manager') {
-      emailSearch = 'manager@shreeinteriors.com';
-      passwordSearch = 'manager123';
-    } else {
-      emailSearch = 'staff@shreeinteriors.com';
-      passwordSearch = 'staff123';
-    }
-
-    const user = await login(emailSearch, passwordSearch);
-    setIsLoading(false);
-    
-    if (user) {
-      toast.success(`Logged in as ${user.name} (${user.role})`);
-      navigate('/dashboard');
-    } else {
-      toast.error("Failed to connect to backend for Quick Login");
-    }
-  };
-
-
   return (
     <div className="min-h-screen bg-gradient-hero flex flex-col justify-center items-center p-4 relative overflow-hidden">
       {/* Background Glows */}
@@ -131,54 +104,6 @@ export default function SignIn() {
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
-
-            <div className="relative my-6">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-border" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Demo Accounts</span>
-              </div>
-            </div>
-
-            {/* Quick Demo Login Panels */}
-            <div className="grid grid-cols-3 gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleQuickLogin('Admin')}
-                className="flex flex-col h-auto py-2.5 px-1 border-border/60 hover:bg-accent/10 hover:border-accent"
-              >
-                <span className="font-bold text-[11px] text-charcoal">Admin</span>
-                <span className="text-[9px] text-muted-foreground mt-0.5">Full Access</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleQuickLogin('Manager')}
-                className="flex flex-col h-auto py-2.5 px-1 border-border/60 hover:bg-accent/10 hover:border-accent"
-              >
-                <span className="font-bold text-[11px] text-charcoal">Manager</span>
-                <span className="text-[9px] text-muted-foreground mt-0.5">Site Control</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleQuickLogin('Staff')}
-                className="flex flex-col h-auto py-2.5 px-1 border-border/60 hover:bg-accent/10 hover:border-accent"
-              >
-                <span className="font-bold text-[11px] text-charcoal">Staff</span>
-                <span className="text-[9px] text-muted-foreground mt-0.5">Daily Work</span>
-              </Button>
-            </div>
-
-            <div className="flex items-center space-x-2 mt-4 bg-muted/50 p-2.5 rounded-lg border border-border/40">
-              <ShieldAlert className="w-4 h-4 text-accent flex-shrink-0" />
-              <p className="text-[10px] text-muted-foreground leading-tight">
-                Use the buttons above for quick demo login, or log in with credentials: <br/>
-                <strong>Email:</strong> admin@shreeinteriors.com | <strong>Pass:</strong> admin123
-              </p>
-            </div>
           </CardContent>
           <CardFooter className="text-center justify-center text-xs text-muted-foreground border-t border-border/30 pt-4">
             © 2026 Shree Interiors. All rights reserved.
