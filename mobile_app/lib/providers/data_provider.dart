@@ -31,6 +31,87 @@ class DataProvider with ChangeNotifier {
   List<Enquiry> get enquiries => _enquiries;
   bool get isLoading => _isLoading;
 
+  DataProvider() {
+    _loadDemoData();
+  }
+
+  void _loadDemoData() {
+    _sites = [
+      Site(
+        id: 'site-1',
+        name: 'T-Nagar Residential Penthouse',
+        address: 'No 15, G.N. Chetty Road, T-Nagar, Chennai - 600017',
+        latitude: 13.0418,
+        longitude: 80.2341,
+        gmapLink: 'https://maps.google.com/?q=13.0418,80.2341',
+        startDate: '2026-08-10',
+        status: 'Active',
+        managerId: 'usr-mgr1',
+        staffIds: ['usr-staff1', 'usr-staff2'],
+        checklist: [
+          ChecklistItem(id: 'chk-1-1', text: 'Modular Kitchen Cabinet Installation', completed: true, percentage: 100, description: 'All base and wall cabinets mounted successfully.'),
+          ChecklistItem(id: 'chk-1-2', text: 'Living Room False Ceiling Framework', completed: true, percentage: 100, description: 'Metal framing is ready.'),
+          ChecklistItem(id: 'chk-1-3', text: 'False Ceiling Gypsum Boarding & Wiring', completed: false, percentage: 65, description: 'Wiring pulled. Gypsum boarding is currently underway.'),
+          ChecklistItem(id: 'chk-1-4', text: 'Master Bedroom Wardrobe Construction', completed: false, percentage: 20, description: 'Ply board cutting started.'),
+        ],
+      ),
+      Site(
+        id: 'site-2',
+        name: 'Adyar Office Space Design',
+        address: '3rd Floor, LB Road, Adyar, Chennai - 600020',
+        latitude: 12.9975,
+        longitude: 80.2520,
+        gmapLink: 'https://maps.google.com/?q=12.9975,80.2520',
+        startDate: '2026-08-15',
+        status: 'Active',
+        managerId: 'usr-mgr2',
+        staffIds: ['usr-staff2'],
+        checklist: [
+          ChecklistItem(id: 'chk-2-1', text: 'Glass Partition Installations', completed: false, percentage: 40, description: 'Channel frames completed. Awaiting glass panes delivery.'),
+          ChecklistItem(id: 'chk-2-2', text: 'Reception Desk Carpentry', completed: true, percentage: 100, description: 'Polishing completed.'),
+        ],
+      ),
+      Site(
+        id: 'site-3',
+        name: 'Anna Nagar Villa Renovation',
+        address: 'Block Y, 5th Avenue, Anna Nagar, Chennai - 600040',
+        latitude: 13.0850,
+        longitude: 80.2101,
+        gmapLink: 'https://maps.google.com/?q=13.0850,80.2101',
+        startDate: '2026-06-01',
+        status: 'Completed',
+        managerId: 'usr-mgr1',
+        staffIds: ['usr-staff1'],
+        checklist: [
+          ChecklistItem(id: 'chk-3-1', text: 'Whole House Painting & Deco', completed: true, percentage: 100, description: 'Final coat finished. Client signed off.'),
+          ChecklistItem(id: 'chk-3-2', text: 'Lighting Fixtures Setup', completed: true, percentage: 100, description: 'LED spotlights and central chandelier installed.'),
+        ],
+      ),
+    ];
+
+    _attendanceLogs = [
+      Attendance(id: 'att-1', userId: 'usr-mgr1', userName: 'Rajesh Kumar', role: 'Manager', siteId: 'site-1', siteName: 'T-Nagar Residential Penthouse', type: 'In', timestamp: '2026-08-28T09:15:00Z', latitude: 13.0419, longitude: 80.2340, isSimulated: false, distance: 15),
+      Attendance(id: 'att-2', userId: 'usr-staff1', userName: 'Suresh Pillai', role: 'Staff', siteId: 'site-1', siteName: 'T-Nagar Residential Penthouse', type: 'In', timestamp: '2026-08-28T09:30:00Z', latitude: 13.0418, longitude: 80.2342, isSimulated: false, distance: 10),
+      Attendance(id: 'att-3', userId: 'usr-staff2', userName: 'Karthik S', role: 'Staff', siteId: 'site-1', siteName: 'T-Nagar Residential Penthouse', type: 'In', timestamp: '2026-08-28T09:40:00Z', latitude: 13.0418, longitude: 80.2341, isSimulated: true, distance: 0),
+    ];
+
+    _bills = [
+      Bill(id: 'bill-1', managerId: 'usr-mgr1', managerName: 'Rajesh Kumar', siteId: 'site-1', siteName: 'T-Nagar Residential Penthouse', amount: 4500.0, description: 'Purchased extra wiring boxes and screws from local hardware store.', status: 'Approved', timestamp: '2026-08-27T17:30:00Z', photoUrl: 'https://res.cloudinary.com/demo/image/upload/v1580977265/sample.jpg'),
+      Bill(id: 'bill-2', managerId: 'usr-mgr1', managerName: 'Rajesh Kumar', siteId: 'site-1', siteName: 'T-Nagar Residential Penthouse', amount: 12500.0, description: 'Gypsum Board panels (25 sheets) urgent delivery.', status: 'Pending', timestamp: '2026-08-28T11:00:00Z', photoUrl: 'https://res.cloudinary.com/demo/image/upload/v1580977265/sample.jpg'),
+    ];
+
+    _payments = [
+      Payment(id: 'pay-1', type: 'Salary', userId: 'usr-mgr1', userName: 'Rajesh Kumar', role: 'Manager', amount: 35000.0, status: 'Paid', description: 'Monthly Salary - July 2026', dateUpdated: '2026-08-05'),
+      Payment(id: 'pay-2', type: 'Salary', userId: 'usr-staff1', userName: 'Suresh Pillai', role: 'Staff', amount: 18000.0, status: 'Paid', description: 'Monthly Salary - July 2026', dateUpdated: '2026-08-05'),
+      Payment(id: 'pay-3', type: 'Bill', userId: 'usr-mgr1', userName: 'Rajesh Kumar', role: 'Manager', billId: 'bill-1', amount: 4500.0, status: 'Paid', description: 'Hardware materials reimbursement', dateUpdated: '2026-08-28'),
+      Payment(id: 'pay-4', type: 'Salary', userId: 'usr-staff2', userName: 'Karthik S', role: 'Staff', amount: 18000.0, status: 'Pending', description: 'Advance payment request', dateUpdated: '2026-08-28'),
+    ];
+
+    _chatMessages = [
+      ChatMessage(id: 'msg-1', senderId: 'usr-staff1', senderName: 'Suresh Pillai', senderRole: 'Staff', recipientId: 'usr-mgr1', recipientName: 'Rajesh Kumar', text: 'Sir, paint stock is running low at T-Nagar site. We need primer tomorrow morning.', timestamp: '2026-08-28T10:00:00Z', isAdminOnly: false),
+    ];
+  }
+
   // Sync / Fetch everything in parallel
   Future<void> fetchAllData() async {
     _isLoading = true;
@@ -49,44 +130,52 @@ class DataProvider with ChangeNotifier {
       ]);
 
       if (futures[0].statusCode == 200) {
-        _users = (jsonDecode(futures[0].body) as List)
-            .map((e) => User.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[0].body);
+        if (fetched.isNotEmpty) {
+          _users = fetched.map((e) => User.fromJson(e)).toList();
+        }
       }
       if (futures[1].statusCode == 200) {
-        _sites = (jsonDecode(futures[1].body) as List)
-            .map((e) => Site.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[1].body);
+        if (fetched.isNotEmpty) {
+          _sites = fetched.map((e) => Site.fromJson(e)).toList();
+        }
       }
       if (futures[2].statusCode == 200) {
-        _attendanceLogs = (jsonDecode(futures[2].body) as List)
-            .map((e) => Attendance.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[2].body);
+        if (fetched.isNotEmpty) {
+          _attendanceLogs = fetched.map((e) => Attendance.fromJson(e)).toList();
+        }
       }
       if (futures[3].statusCode == 200) {
-        _bills = (jsonDecode(futures[3].body) as List)
-            .map((e) => Bill.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[3].body);
+        if (fetched.isNotEmpty) {
+          _bills = fetched.map((e) => Bill.fromJson(e)).toList();
+        }
       }
       if (futures[4].statusCode == 200) {
-        _payments = (jsonDecode(futures[4].body) as List)
-            .map((e) => Payment.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[4].body);
+        if (fetched.isNotEmpty) {
+          _payments = fetched.map((e) => Payment.fromJson(e)).toList();
+        }
       }
       if (futures[5].statusCode == 200) {
-        _workDoneList = (jsonDecode(futures[5].body) as List)
-            .map((e) => WorkDone.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[5].body);
+        if (fetched.isNotEmpty) {
+          _workDoneList = fetched.map((e) => WorkDone.fromJson(e)).toList();
+        }
       }
       if (futures[6].statusCode == 200) {
-        _chatMessages = (jsonDecode(futures[6].body) as List)
-            .map((e) => ChatMessage.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[6].body);
+        if (fetched.isNotEmpty) {
+          _chatMessages = fetched.map((e) => ChatMessage.fromJson(e)).toList();
+        }
       }
       if (futures[7].statusCode == 200) {
-        _enquiries = (jsonDecode(futures[7].body) as List)
-            .map((e) => Enquiry.fromJson(e))
-            .toList();
+        final List fetched = jsonDecode(futures[7].body);
+        if (fetched.isNotEmpty) {
+          _enquiries = fetched.map((e) => Enquiry.fromJson(e)).toList();
+        }
       }
     } catch (e, stack) {
       print("DataProvider fetchAllData error: $e");
@@ -215,7 +304,7 @@ class DataProvider with ChangeNotifier {
 
   Future<bool> reviewWorkDone(String recordId, String reviewText) async {
     try {
-      final res = await ApiService.put('/api/workdone/$recordId', {
+      final res = await ApiService.put('/api/workdone/$recordId/review', {
         'reviewText': reviewText,
       });
       if (res.statusCode == 200) {
@@ -256,7 +345,7 @@ class DataProvider with ChangeNotifier {
 
   Future<bool> updateBillStatus(String billId, String status) async {
     try {
-      final res = await ApiService.put('/api/bills/$billId', {
+      final res = await ApiService.put('/api/bills/$billId/review', {
         'status': status,
       });
       if (res.statusCode == 200) {
