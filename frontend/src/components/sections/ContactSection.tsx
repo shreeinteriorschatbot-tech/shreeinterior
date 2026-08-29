@@ -45,8 +45,9 @@ const ContactSection = () => {
       // Validate form data
       const validatedData = contactSchema.parse(formData);
       
-      // Send form data to FastAPI contact endpoint
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/contact`, {
+      const rawUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const apiUrl = rawUrl.endsWith('/') ? rawUrl.slice(0, -1) : rawUrl;
+      const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -203,8 +203,8 @@ const setStorageItem = <T>(key: string, value: T): void => {
   localStorage.setItem(`shree_db_${key}`, JSON.stringify(value));
 };
 
-// --- BACKEND SYNC CONFIGURATION ---
-const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+const rawUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+const API_URL = rawUrl.endsWith('/') ? rawUrl.slice(0, -1) : rawUrl;
 
 const getHeaders = () => {
   const token = localStorage.getItem('shree_token') || '';
