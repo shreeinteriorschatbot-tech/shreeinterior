@@ -18,7 +18,7 @@ class ChecklistItem {
       id: json['id'] ?? '',
       text: json['text'] ?? '',
       completed: json['completed'] ?? false,
-      percentage: json['percentage'] ?? 0,
+      percentage: (json['percentage'] as num?)?.toInt() ?? 0,
       description: json['description'] ?? '',
     );
   }

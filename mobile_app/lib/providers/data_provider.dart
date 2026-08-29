@@ -88,7 +88,10 @@ class DataProvider with ChangeNotifier {
             .map((e) => Enquiry.fromJson(e))
             .toList();
       }
-    } catch (_) {}
+    } catch (e, stack) {
+      print("DataProvider fetchAllData error: $e");
+      print(stack);
+    }
 
     _isLoading = false;
     notifyListeners();
