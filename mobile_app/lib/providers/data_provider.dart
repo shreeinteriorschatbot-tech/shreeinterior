@@ -7,6 +7,7 @@ import '../models/bill.dart';
 import '../models/payment.dart';
 import '../models/work_done.dart';
 import '../models/chat.dart';
+import '../models/enquiry.dart';
 import '../services/api_service.dart';
 
 class DataProvider with ChangeNotifier {
@@ -17,6 +18,7 @@ class DataProvider with ChangeNotifier {
   List<Payment> _payments = [];
   List<WorkDone> _workDoneList = [];
   List<ChatMessage> _chatMessages = [];
+  List<Enquiry> _enquiries = [];
   bool _isLoading = false;
 
   List<User> get users => _users;
@@ -26,6 +28,7 @@ class DataProvider with ChangeNotifier {
   List<Payment> get payments => _payments;
   List<WorkDone> get workDoneList => _workDoneList;
   List<ChatMessage> get chatMessages => _chatMessages;
+  List<Enquiry> get enquiries => _enquiries;
   bool get isLoading => _isLoading;
 
   // Sync / Fetch everything in parallel
@@ -42,6 +45,7 @@ class DataProvider with ChangeNotifier {
         ApiService.get('/api/payments'),
         ApiService.get('/api/workdone'),
         ApiService.get('/api/chat'),
+        ApiService.get('/api/contact'),
       ]);
 
       if (futures[0].statusCode == 200) {
@@ -77,6 +81,11 @@ class DataProvider with ChangeNotifier {
       if (futures[6].statusCode == 200) {
         _chatMessages = (jsonDecode(futures[6].body) as List)
             .map((e) => ChatMessage.fromJson(e))
+            .toList();
+      }
+      if (futures[7].statusCode == 200) {
+        _enquiries = (jsonDecode(futures[7].body) as List)
+            .map((e) => Enquiry.fromJson(e))
             .toList();
       }
     } catch (_) {}

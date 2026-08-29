@@ -102,6 +102,15 @@ export interface ChatMessage {
   isAdminOnly: boolean;
 }
 
+export interface Enquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  timestamp: string;
+}
+
 // Pre-seeded Demo Data
 const DEMO_USERS: User[] = [
   { id: 'usr-admin', email: 'admin@shreeinteriors.com', name: 'Founder Admin', role: 'Admin', phone: '9941387939', password: 'admin123' },
@@ -221,7 +230,7 @@ export const syncWithBackend = async (): Promise<boolean> => {
   const token = localStorage.getItem('shree_token');
   if (!token) return false;
   try {
-    const [usersRes, sitesRes, attRes, wdRes, billsRes, payRes, chatRes] = await Promise.all([
+    const [usersRes, sitesRes, attRes, wdRes, billsRes, payRes, chatRes, contactRes] = await Promise.all([
       fetch(`${API_URL}/api/users`, { headers: getHeaders() }),
       fetch(`${API_URL}/api/sites`, { headers: getHeaders() }),
       fetch(`${API_URL}/api/attendance`, { headers: getHeaders() }),
@@ -229,6 +238,7 @@ export const syncWithBackend = async (): Promise<boolean> => {
       fetch(`${API_URL}/api/bills`, { headers: getHeaders() }),
       fetch(`${API_URL}/api/payments`, { headers: getHeaders() }),
       fetch(`${API_URL}/api/chat`, { headers: getHeaders() }),
+      fetch(`${API_URL}/api/contact`, { headers: getHeaders() }),
     ]);
 
     if (usersRes.ok) setStorageItem('users', await usersRes.json());
@@ -238,6 +248,7 @@ export const syncWithBackend = async (): Promise<boolean> => {
     if (billsRes.ok) setStorageItem('bills', await billsRes.json());
     if (payRes.ok) setStorageItem('payments', await payRes.json());
     if (chatRes.ok) setStorageItem('chat', await chatRes.json());
+    if (contactRes.ok) setStorageItem('enquiries', await contactRes.json());
 
     return true;
   } catch (err) {
@@ -553,6 +564,9 @@ export const db = {
     setStorageItem('chat', messages);
     syncChatMessages(messages, old).then(() => syncWithBackend());
   },
+  
+  // Enquiries
+  getEnquiries: (): Enquiry[] => getStorageItem('enquiries', []),
   
   // Real network-based delete user function
   deleteUser: async (userId: string, adminKey?: string): Promise<boolean> => {

@@ -491,5 +491,14 @@ async def submit_contact(form: ContactFormCreate):
         "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
     }
     await contacts_col.insert_one(form_doc)
-    # Return success response compatible with existing edge functions expectations
     return {"success": True, "id": new_id}
+
+@app.get("/api/contact", response_model=List[dict])
+async def get_contacts(current_user: dict = Depends(get_current_user_from_token)):
+    if current_user["role"] != "Admin":
+        raise HTTPException(status_code=403, detail="Not authorized")
+    contacts = await contacts_col.find({}).to_list(length=100)
+    for c in contacts:
+        if "_id" in c:
+            c["_id"] = str(c["_id"])
+    return contacts

@@ -18,12 +18,12 @@ class _SignInScreenState extends State<SignInScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     final auth = Provider.of<AuthProvider>(context, listen: false);
-    final success = await auth.login(
-      _emailController.text.trim(),
-      _passwordController.text.trim(),
+    final errorMsg = await auth.login(
+      _emailController.text,
+      _passwordController.text,
     );
 
-    if (success) {
+    if (errorMsg == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Welcome back, ${auth.currentUser?.name}!'),
@@ -33,8 +33,8 @@ class _SignInScreenState extends State<SignInScreen> {
       Navigator.pushReplacementNamed(context, '/dashboard');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Invalid email or password'),
+        SnackBar(
+          content: Text(errorMsg),
           backgroundColor: Colors.red,
         ),
       );

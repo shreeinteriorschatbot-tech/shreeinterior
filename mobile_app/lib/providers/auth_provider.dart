@@ -43,16 +43,19 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Login handler
-  Future<bool> login(String email, String password) async {
+  // Login handler with advanced diagnostics
+  Future<String?> login(String email, String password) async {
     _isLoading = true;
     notifyListeners();
 
     try {
       final res = await ApiService.post('/api/auth/login', {
-        'email': email,
-        'password': password,
-      });
+        'email': email.trim(),
+        'password': password.trim(),
+      }).timeout(const Duration(seconds: 10));
+
+      _isLoading = false;
+      notifyListeners();
 
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
@@ -64,15 +67,17 @@ class AuthProvider with ChangeNotifier {
 
         _currentUser = user;
         _isAuthenticated = true;
-        _isLoading = false;
-        notifyListeners();
-        return true;
+        return null; // Null means success
+      } else if (res.statusCode == 401 || res.statusCode == 403) {
+        return "Invalid email or password";
+      } else {
+        return "Server error (${res.statusCode}): Please try again later.";
       }
-    } catch (_) {}
-
-    _isLoading = false;
-    notifyListeners();
-    return false;
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+      return "Connection error: Check your internet or backend URL. Detail: $e";
+    }
   }
 
   // Logout handler

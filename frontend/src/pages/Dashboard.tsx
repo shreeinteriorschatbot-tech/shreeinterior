@@ -16,7 +16,8 @@ import {
   Menu,
   X,
   UserCheck,
-  Bot
+  Bot,
+  Mail
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -31,6 +32,7 @@ import PaymentsTab from '@/components/dashboard/PaymentsTab';
 import ChatTab from '@/components/dashboard/ChatTab';
 import ChecklistTab from '@/components/dashboard/ChecklistTab';
 import SettingsTab from '@/components/dashboard/SettingsTab';
+import EnquiriesTab from '@/components/dashboard/EnquiriesTab';
 import { ChatbotWidget } from '@/components/ui/ChatbotWidget';
 
 export default function Dashboard() {
@@ -78,6 +80,7 @@ export default function Dashboard() {
     { id: 'bills', label: 'Bills Claims', icon: Receipt, roles: ['Admin', 'Manager'] },
     { id: 'payments', label: 'Payments Tracker', icon: CreditCard, roles: ['Admin', 'Manager', 'Staff'] },
     { id: 'chat', label: 'Internal Messages', icon: MessageSquare, roles: ['Admin', 'Manager', 'Staff'] },
+    { id: 'enquiries', label: 'Customer Enquiries', icon: Mail, roles: ['Admin'] },
     { id: 'settings', label: 'Account Settings', icon: Settings, roles: ['Admin', 'Manager', 'Staff'] },
   ];
 
@@ -101,6 +104,8 @@ export default function Dashboard() {
         return <PaymentsTab user={user} />;
       case 'chat':
         return <ChatTab user={user} />;
+      case 'enquiries':
+        return <EnquiriesTab />;
       case 'settings':
         return <SettingsTab user={user} />;
       default:

@@ -12,6 +12,7 @@ import '../tabs/bills_tab.dart';
 import '../tabs/payments_tab.dart';
 import '../tabs/chat_tab.dart';
 import '../tabs/settings_tab.dart';
+import '../tabs/enquiries_tab.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -48,6 +49,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         return const PaymentsTab();
       case 'Internal Messages':
         return const ChatTab();
+      case 'Customer Enquiries':
+        return const EnquiriesTab();
       case 'Account Settings':
         return const SettingsTab();
       default:
@@ -68,6 +71,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
     if (role == 'Admin') {
       items.add({'id': 'Payments', 'label': 'Payments Tracker', 'icon': Icons.payments});
+      items.add({'id': 'Customer Enquiries', 'label': 'Customer Enquiries', 'icon': Icons.mail});
     }
 
     items.add({'id': 'Internal Messages', 'label': 'Internal Messages', 'icon': Icons.chat});
