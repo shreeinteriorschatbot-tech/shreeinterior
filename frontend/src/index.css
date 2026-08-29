@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shree Interiors Design System - Sophisticated Interior Design Color Palette
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base Colors */
+    --background: 37 18% 98%;
+    --foreground: 20 14% 12%;
+
+    /* Card System */
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 12%;
+
+    /* Popover System */
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14% 12%;
+
+    /* Primary Brand Colors - Sophisticated Cream/Beige */
+    --primary: 37 25% 88%;
+    --primary-foreground: 20 14% 12%;
+    --primary-hover: 37 30% 85%;
+
+    /* Secondary Colors - Warm Neutrals */
+    --secondary: 30 8% 94%;
+    --secondary-foreground: 20 14% 12%;
+    --secondary-hover: 30 12% 90%;
+
+    /* Muted Colors */
+    --muted: 30 8% 96%;
+    --muted-foreground: 20 8% 45%;
+
+    /* Accent Colors - Elegant Gold */
+    --accent: 45 90% 65%;
+    --accent-foreground: 20 14% 12%;
+    --accent-soft: 45 50% 90%;
+
+    /* Status Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 120 50% 45%;
+    --success-foreground: 0 0% 98%;
+
+    /* Border & Input */
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 45 90% 65%;
+
+    /* Design System */
+    --radius: 0.75rem;
+
+    /* Custom Interior Design Colors */
+    --charcoal: 20 14% 15%;
+    --warm-white: 37 18% 98%;
+    --cream: 37 25% 88%;
+    --gold: 45 90% 65%;
+    --sage: 120 20% 75%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(37 25% 88%), hsl(37 18% 98%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(30 8% 96%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 90% 65%), hsl(45 70% 75%));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(20 14% 15% / 0.08);
+    --shadow-medium: 0 8px 30px -4px hsl(20 14% 15% / 0.12);
+    --shadow-strong: 0 20px 40px -8px hsl(20 14% 15% / 0.18);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode for sophisticated interior theme */
+    --background: 20 14% 8%;
+    --foreground: 37 18% 98%;
+
+    --card: 20 14% 10%;
+    --card-foreground: 37 18% 98%;
+
+    --popover: 20 14% 10%;
+    --popover-foreground: 37 18% 98%;
+
+    --primary: 37 25% 88%;
+    --primary-foreground: 20 14% 12%;
+    --primary-hover: 37 30% 85%;
+
+    --secondary: 20 14% 15%;
+    --secondary-foreground: 37 18% 98%;
+    --secondary-hover: 20 14% 18%;
+
+    --muted: 20 14% 15%;
+    --muted-foreground: 30 8% 65%;
+
+    --accent: 45 90% 65%;
+    --accent-foreground: 20 14% 12%;
+    --accent-soft: 45 50% 25%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 37 18% 98%;
+
+    --border: 20 14% 18%;
+    --input: 20 14% 18%;
+    --ring: 45 90% 65%;
+
+    /* Dark mode specific */
+    --charcoal: 37 18% 92%;
+    --warm-white: 20 14% 8%;
+    --cream: 20 14% 20%;
+    --gold: 45 90% 65%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(20 14% 12%), hsl(20 14% 8%));
+    --gradient-card: linear-gradient(180deg, hsl(20 14% 10%), hsl(20 14% 8%));
+    --shadow-soft: 0 4px 20px -2px hsl(0 0% 0% / 0.25);
+    --shadow-medium: 0 8px 30px -4px hsl(0 0% 0% / 0.35);
+    --shadow-strong: 0 20px 40px -8px hsl(0 0% 0% / 0.45);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

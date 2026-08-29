@@ -1,0 +1,46 @@
+project_id = "xvgfrykfprnzkrrqgwlp"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[auth]
+enabled = true
+# The base URL of your website. Used as an allow-list for redirects and for constructing URLs used
+# in emails.
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["https://lovable.dev"]
+jwt_expiry = 3600
+enable_signup = true
+enable_anonymous_sign_ups = false
+enable_manual_linking = false
+# Allow/disallow new user signups to your project.
+enable_confirmations = false
+# Allow/disallow a user to recover their password.
+enable_recovery = false
+# Allow/disallow a user to change their email address.
+enable_email_change = false
+# Allow/disallow testing manual linking of accounts
+enable_manual_linking = false
+
+[auth.email]
+# Allow/disallow signups via email.
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = false
+max_frequency = "1h"
+secure_password_change = false
+
+[db]
+major_version = 15
+
+[edge_runtime]
+enabled = true
+inspector_port = 8083
+policy = "per_worker"
+
+[functions.send-email]
+verify_jwt = false
